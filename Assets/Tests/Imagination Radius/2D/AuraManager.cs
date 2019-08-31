@@ -8,7 +8,6 @@ public class AuraManager : MonoBehaviour
     public float softness = 20f;
     public float radius = 200f;
     public Vector4 auraCenter = new Vector4(0, 0, 0, 0);
-    
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +26,8 @@ public class AuraManager : MonoBehaviour
         UpdateAuraCenter(auraCenter.x, auraCenter.y);
     }
 
+
+    // Update Aura Methods
     public void UpdateAuraRadius(float new_radius) {
         this.radius = new_radius;
         Shader.SetGlobalFloat("_AuraRadius", new_radius);
