@@ -4,9 +4,6 @@
 	{
 		_MainTex("Imaginary Texture", 2D) = "white" {}
 		_ReTex("Real Texture", 2D) = "white" {}
-		_Position("World Position", Vector) = (0,0,0,0)
-		_Radius("Radius", Range(0, 100)) = 0
-		_Softness("Softness", Range(0, 100)) = 0
 	}
 		SubShader
 		{
@@ -32,11 +29,9 @@
 				float4 _ReTex_TexelSize;
 
 				// Spherical Mask
-				float4 _Position;
-				half _Radius;
-				half _Softness;
 				float4 _AuraCenter;
 				half _AuraRadius;
+				half _AuraSoftness;
 
 				v2f vertexFunc(appdata_base v)
 				{
@@ -53,7 +48,7 @@
 					half4 col_re = tex2D(_ReTex, i.uv);
 
 					half d = distance(i.pos, _AuraCenter);
-					half sum = saturate((d - _AuraRadius) / -_Softness);
+					half sum = saturate((d - _AuraRadius) / - _AuraSoftness);
 					half4 lerpColor = lerp(col_im, col_re, sum);
 
 					return lerpColor;
