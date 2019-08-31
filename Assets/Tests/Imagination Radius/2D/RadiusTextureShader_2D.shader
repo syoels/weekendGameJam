@@ -2,7 +2,7 @@
 {
 	Properties
 	{
-		_ImTex("Imaginary Texture", 2D) = "white" {}
+		_MainTex("Imaginary Texture", 2D) = "white" {}
 		_ReTex("Real Texture", 2D) = "white" {}
 		_Position("World Position", Vector) = (0,0,0,0)
 		_Radius("Radius", Range(0, 100)) = 0
@@ -26,10 +26,10 @@
 					float4 pos : SV_POSITION;
 				};
 
-				sampler2D _ImTex;
-				float4 _ImTex_TexelSize;
+				sampler2D _MainTex;
+				float4 _MainTex_TexelSize;
 				sampler2D _ReTex;
-				float4 _ReTex__TexelSize;
+				float4 _ReTex_TexelSize;
 
 				// Spherical Mask
 				float4 _Position;
@@ -47,7 +47,7 @@
 				fixed4 fragmentFunc(v2f i) : COLOR
 				{
 					// sample the texture
-					half4 col_im = tex2D(_ImTex, i.uv);
+					half4 col_im = tex2D(_MainTex, i.uv);
 					half4 col_re = tex2D(_ReTex, i.uv);
 
 					half d = distance(i.pos, _Position);
