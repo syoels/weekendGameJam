@@ -35,6 +35,8 @@
 				float4 _Position;
 				half _Radius;
 				half _Softness;
+				float4 _AuraCenter;
+				half _AuraRadius;
 
 				v2f vertexFunc(appdata_base v)
 				{
@@ -50,8 +52,8 @@
 					half4 col_im = tex2D(_MainTex, i.uv);
 					half4 col_re = tex2D(_ReTex, i.uv);
 
-					half d = distance(i.pos, _Position);
-					half sum = saturate((d - _Radius) / -_Softness);
+					half d = distance(i.pos, _AuraCenter);
+					half sum = saturate((d - _AuraRadius) / -_Softness);
 					half4 lerpColor = lerp(col_im, col_re, sum);
 
 					return lerpColor;
